@@ -17,10 +17,10 @@ class ExperiencesPage extends StatelessWidget {
   const ExperiencesPage({super.key});
 
   static const _comingSoon = [
-    _ComingSoonPillar("🎤", "Music Night", "Karaoke, jamming and open mic."),
-    _ComingSoonPillar("🪩", "Social Mixer", "House parties and late-night hangs."),
-    _ComingSoonPillar("🍜", "Food Crawl", "Bengaluru's best spots, together."),
-    _ComingSoonPillar("🌄", "Weekend Escape", "Trips, hikes and adventures."),
+    _ComingSoonPillar("🎤", "Music Night", "Belting out SPB hits, kuthu beats, and acoustic jamming."),
+    _ComingSoonPillar("🪩", "Social Mixer", "House parties, mixers, and yapping in Tanglish till 3 AM."),
+    _ComingSoonPillar("🍜", "Food Crawl", "Filter kaapi, proper biryani, and finding the best spots."),
+    _ComingSoonPillar("🏕️", "Weekend Escape", "Touching grass. Weekend trips and escaping Silk Board traffic."),
   ];
 
   @override
@@ -45,16 +45,19 @@ class ExperiencesPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("EXPERIENCES", style: AppTextStyles.eyebrow(color: AppColors.gold)),
+                      Text("EXPERIENCES",
+                          style: AppTextStyles.eyebrow(color: AppColors.gold)),
                       const SizedBox(height: 12),
                       Text(
                         "What's happening.",
-                        style: AppTextStyles.display(color: AppColors.cream, size: isMobile ? 32 : 48),
+                        style: AppTextStyles.display(
+                            color: AppColors.cream, size: isMobile ? 32 : 48),
                       ),
                       const SizedBox(height: 14),
                       Text(
                         "Small gatherings. New people. Shared culture.",
-                        style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.75), size: 17),
+                        style: AppTextStyles.body(
+                            color: AppColors.cream.withOpacity(0.75), size: 17),
                       ),
                     ],
                   ),
@@ -136,7 +139,8 @@ class ExperiencesPage extends StatelessWidget {
                         label: "Join WhatsApp community →",
                         variant: AppButtonVariant.teal,
                         onPressed: () {
-                          AnalyticsService.track("whatsapp_clicked", {"from": "experiences_page"});
+                          AnalyticsService.track(
+                              "whatsapp_clicked", {"from": "experiences_page"});
                           ShareService.openUrl(AppLinks.whatsapp);
                         },
                       ),
@@ -193,7 +197,8 @@ class ExperiencesPage extends StatelessWidget {
         const SizedBox(height: 14),
         Text(
           "Late-Night Mafia",
-          style: AppTextStyles.display(color: AppColors.cream, size: isMobile ? 24 : 30),
+          style: AppTextStyles.display(
+              color: AppColors.cream, size: isMobile ? 24 : 30),
         ),
         const SizedBox(height: 16),
         _detailRow("📅", event.dateLabel),
@@ -204,7 +209,8 @@ class ExperiencesPage extends StatelessWidget {
         const SizedBox(height: 18),
         Text(
           "15–20 people. One living room. Questionable alliances.",
-          style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.75), size: 15),
+          style: AppTextStyles.body(
+              color: AppColors.cream.withOpacity(0.75), size: 15),
         ),
         const SizedBox(height: 16),
         Wrap(
@@ -235,7 +241,8 @@ class ExperiencesPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Entry by approval", style: AppTextStyles.eyebrow(color: AppColors.gold)),
+              Text("Entry by approval",
+                  style: AppTextStyles.eyebrow(color: AppColors.gold)),
               const SizedBox(height: 8),
               Text(
                 event.price,
@@ -244,7 +251,8 @@ class ExperiencesPage extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 event.capacityLabel,
-                style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.6), size: 13),
+                style: AppTextStyles.body(
+                    color: AppColors.cream.withOpacity(0.6), size: 13),
               ),
               const SizedBox(height: 18),
               AppButton(
@@ -252,7 +260,8 @@ class ExperiencesPage extends StatelessWidget {
                 variant: AppButtonVariant.gold,
                 large: true,
                 onPressed: () {
-                  AnalyticsService.track("luma_clicked", {"from": "experiences_page"});
+                  AnalyticsService.track(
+                      "luma_clicked", {"from": "experiences_page"});
                   ShareService.openUrl(event.lumaUrl);
                 },
               ),
@@ -280,7 +289,9 @@ class ExperiencesPage extends StatelessWidget {
       children: [
         Text(emoji, style: const TextStyle(fontSize: 14)),
         const SizedBox(width: 8),
-        Text(text, style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.75), size: 14)),
+        Text(text,
+            style: AppTextStyles.body(
+                color: AppColors.cream.withOpacity(0.75), size: 14)),
       ],
     );
   }
@@ -302,9 +313,13 @@ class ExperiencesPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(p.name, style: AppTextStyles.display(size: 14, color: AppColors.charcoal.withOpacity(0.5))),
+                Text(p.name,
+                    style: AppTextStyles.display(
+                        size: 14, color: AppColors.charcoal.withOpacity(0.5))),
                 const SizedBox(height: 2),
-                Text(p.description, style: AppTextStyles.body(size: 13, color: AppColors.charcoal.withOpacity(0.35))),
+                Text(p.description,
+                    style: AppTextStyles.body(
+                        size: 13, color: AppColors.charcoal.withOpacity(0.35))),
               ],
             ),
           ),
@@ -315,7 +330,9 @@ class ExperiencesPage extends StatelessWidget {
               color: AppColors.charcoal.withOpacity(0.06),
               borderRadius: BorderRadius.circular(4),
             ),
-            child: Text("SOON", style: AppTextStyles.eyebrow(color: AppColors.charcoal.withOpacity(0.3))),
+            child: Text("SOON",
+                style: AppTextStyles.eyebrow(
+                    color: AppColors.charcoal.withOpacity(0.3))),
           ),
         ],
       ),
@@ -343,7 +360,9 @@ class _ActivityChip extends StatelessWidget {
         borderRadius: BorderRadius.circular(4),
         border: Border.all(color: AppColors.cream.withOpacity(0.15)),
       ),
-      child: Text(label, style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.75), size: 13)),
+      child: Text(label,
+          style: AppTextStyles.body(
+              color: AppColors.cream.withOpacity(0.75), size: 13)),
     );
   }
 }

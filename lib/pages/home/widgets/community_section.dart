@@ -5,57 +5,72 @@ import "../../../core/theme/app_text_styles.dart";
 import "../../../services/analytics_service.dart";
 import "../../../services/share_service.dart";
 import "../../../widgets/buttons/app_button.dart";
-import "../../../widgets/sections/section_wrapper.dart";
 
 class CommunitySection extends StatelessWidget {
   const CommunitySection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SectionWrapper(
-      background: SectionBackground.cream,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            "COME FOR THE EVENT.\nSTAY FOR THE PEOPLE.",
-            textAlign: TextAlign.center,
-            style: AppTextStyles.display(size: 32),
-          ),
-          const SizedBox(height: 16),
-          ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 460),
-            child: Text(
-              "We're building a community for Tamil people in Bengaluru who want more than another networking event.",
-              textAlign: TextAlign.center,
-              style: AppTextStyles.body(size: 18, color: AppColors.charcoal.withOpacity(0.78)),
-            ),
-          ),
-          const SizedBox(height: 24),
-          Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            alignment: WrapAlignment.center,
+    final isMobile = MediaQuery.of(context).size.width < 768;
+    return Container(
+      width: double.infinity,
+      color: AppColors.charcoal,
+      padding: EdgeInsets.symmetric(
+        horizontal: isMobile ? 20 : 40,
+        vertical: isMobile ? 72 : 112,
+      ),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 680),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              AppButton(
-                label: "Join the WhatsApp community →",
-                variant: AppButtonVariant.teal,
-                onPressed: () {
-                  AnalyticsService.track("whatsapp_clicked", {"from": "community_section"});
-                  ShareService.openUrl(AppLinks.whatsapp);
-                },
+              Text(
+                "Come for the event.\nStay for the people.",
+                textAlign: TextAlign.center,
+                style: AppTextStyles.display(
+                  size: isMobile ? 32 : 46,
+                  color: AppColors.cream,
+                ).copyWith(height: 1.1, letterSpacing: -0.5),
               ),
-              AppButton(
-                label: "Follow @tamilsocialclub →",
-                variant: AppButtonVariant.ghostDark,
-                onPressed: () {
-                  AnalyticsService.track("instagram_clicked", {"from": "community_section"});
-                  ShareService.openUrl(AppLinks.instagram);
-                },
+              const SizedBox(height: 24),
+              Text(
+                "We're building a community for Tamil people in Bengaluru who want more than another networking event.",
+                textAlign: TextAlign.center,
+                style: AppTextStyles.body(
+                  size: isMobile ? 18 : 20,
+                  color: AppColors.cream.withOpacity(0.7),
+                ),
+              ),
+              const SizedBox(height: 44),
+              Wrap(
+                spacing: 16,
+                runSpacing: 16,
+                alignment: WrapAlignment.center,
+                children: [
+                  AppButton(
+                    label: "Join the WhatsApp community →",
+                    variant: AppButtonVariant.gold,
+                    large: isMobile ? false : true,
+                    onPressed: () {
+                      AnalyticsService.track("whatsapp_clicked", {"from": "community_section"});
+                      ShareService.openUrl(AppLinks.whatsapp);
+                    },
+                  ),
+                  AppButton(
+                    label: "Follow @tamilsocialclub →",
+                    variant: AppButtonVariant.ghostLight,
+                    large: isMobile ? false : true,
+                    onPressed: () {
+                      AnalyticsService.track("instagram_clicked", {"from": "community_section"});
+                      ShareService.openUrl(AppLinks.instagram);
+                    },
+                  ),
+                ],
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }
