@@ -23,7 +23,7 @@ class LandingView extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         Text(
-          "8 questions.\n2 minutes.\n100% judge-mental.",
+          "8 questions.\n2 minutes.\nCompletely unscientific.",
           textAlign: TextAlign.center,
           style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.85), size: 17),
         ),

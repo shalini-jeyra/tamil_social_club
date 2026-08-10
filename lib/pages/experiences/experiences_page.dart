@@ -17,10 +17,10 @@ class ExperiencesPage extends StatelessWidget {
   const ExperiencesPage({super.key});
 
   static const _comingSoon = [
-    _ComingSoonPillar("🎤", "Music Night", "Belting out SPB hits, kuthu beats, and acoustic jamming."),
-    _ComingSoonPillar("🪩", "Social Mixer", "House parties, mixers, and yapping in Tanglish till 3 AM."),
-    _ComingSoonPillar("🍜", "Food Crawl", "Filter kaapi, proper biryani, and finding the best spots."),
-    _ComingSoonPillar("🏕️", "Weekend Escape", "Touching grass. Weekend trips and escaping Silk Board traffic."),
+    _ComingSoonPillar("🎤", "Music Night", "Karaoke, jamming and open mic."),
+    _ComingSoonPillar("🪩", "Social Mixer", "House parties and late-night hangs."),
+    _ComingSoonPillar("🍜", "Food Crawl", "Bengaluru's best spots, together."),
+    _ComingSoonPillar("🏕️", "Weekend Escape", "Trips, hikes and adventures."),
   ];
 
   @override

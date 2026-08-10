@@ -9,12 +9,12 @@ class ExperiencePillarsSection extends StatelessWidget {
 
   // Funnier, less formal copy for the community vibe.
   static const _pillars = [
-    _Pillar("🎲", "Play", "Board games, Mafia betrayals, and shouting in Tamil over Uno.", true),
-    _Pillar("🎥", "Cinema", "FDFS energy, overanalyzing Kollywood, and peak pop culture.", true),
-    _Pillar("🍜", "Food", "Filter kaapi, proper biryani, and finding the best spots.", false),
-    _Pillar("🎤", "Music", "Belting out SPB hits, kuthu beats, and acoustic jamming.", false),
-    _Pillar("🪩", "Social", "House parties, mixers, and yapping in Tanglish till 3 AM.", false),
-    _Pillar("🏕️", "Escape", "Touching grass. Weekend trips and escaping Silk Board traffic.", false),
+    _Pillar("🎲", "Play", "Board games, Mafia, trivia and challenges.", true),
+    _Pillar("🎥", "Cinema", "Tamil movies, discussions and pop culture.", true),
+    _Pillar("🍜", "Food", "Food crawls, dinners and café plans.", false),
+    _Pillar("🎤", "Music", "Karaoke, jamming and open mic.", false),
+    _Pillar("🪩", "Social", "Mixers, house parties and late-night hangs.", false),
+    _Pillar("🏕️", "Escape", "Trips, hikes and weekend adventures.", false),
   ];
 
   @override

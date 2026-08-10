@@ -44,7 +44,7 @@ class Chapter0TeaserSection extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           Text(
-            "15–20 people. One living room. Trust no one, especially that one friend who swears they are a villager.",
+            "15–20 people. One living room. Questionable alliances.",
             style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.85), size: 17),
           ),
           const SizedBox(height: 8),

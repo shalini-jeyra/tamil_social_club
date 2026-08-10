@@ -61,7 +61,7 @@ class WhatTscIsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Ithu LinkedIn\nilla.",
+          "More than just\nnetworking.",
           style: AppTextStyles.display(
             color: AppColors.cream,
             size: isMobile ? 30 : 42,
@@ -69,7 +69,7 @@ class WhatTscIsSection extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         Text(
-          "No startup pitches. No awkward 'so what do you do' small talk. Just a space to chill, meet namma aalu's, and actually have fun.",
+          "We believe the best connections happen naturally. Swap the stiff pitches and formal panels for shared interests and genuinely good weekends.",
           style: AppTextStyles.body(
             color: AppColors.cream.withOpacity(0.85),
             size: isMobile ? 18 : 20,
@@ -83,9 +83,9 @@ class WhatTscIsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _line("No 'what's your CTC' uncle energy."),
+        _line("No stiff panels or forced pitches."),
         const SizedBox(height: 16),
-        _line("No forced networking vibes."),
+        _line("Organic networking over shared interests."),
         const SizedBox(height: 32),
         Container(
           padding: const EdgeInsets.all(24),
