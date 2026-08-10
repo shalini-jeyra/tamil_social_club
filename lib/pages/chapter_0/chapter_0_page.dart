@@ -7,6 +7,7 @@ import "../../models/event.dart";
 import "../../services/analytics_service.dart";
 import "../../services/share_service.dart";
 import "../../widgets/buttons/app_button.dart";
+import "../../widgets/navigation/app_drawer.dart";
 import "../../widgets/navigation/app_footer.dart";
 import "../../widgets/navigation/app_header.dart";
 
@@ -33,6 +34,7 @@ class _Chapter0PageState extends State<Chapter0Page> {
 
     return Scaffold(
       appBar: const AppHeader(),
+      drawer: const AppDrawer(),
       body: SingleChildScrollView(
         child: Column(
           children: [

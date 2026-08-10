@@ -49,9 +49,9 @@ class HeroSection extends StatelessWidget {
                     },
                   ),
                   AppButton(
-                    label: "See Chapter 0 →",
+                    label: "See what's happening →",
                     variant: AppButtonVariant.ghostLight,
-                    onPressed: () => context.goNamed("chapter0"),
+                    onPressed: () => context.goNamed("experiences"),
                   ),
                 ],
               ),
