@@ -8,12 +8,12 @@ class ExperiencePillarsSection extends StatelessWidget {
   const ExperiencePillarsSection({super.key});
 
   static const _pillars = [
-    _Pillar("🎲", "PLAY", "Games, Mafia, trivia and challenges.", true),
-    _Pillar("🎬", "CINEMA", "Tamil movies, discussions and pop culture.", true),
-    _Pillar("🍜", "FOOD", "Food crawls, dinners and café plans.", false),
-    _Pillar("🎤", "MUSIC", "Karaoke, jamming and open mic.", false),
-    _Pillar("🪩", "SOCIAL", "Mixers, house parties and late-night hangs.", false),
-    _Pillar("🌄", "ESCAPE", "Trips, hikes and weekend adventures.", false),
+    _Pillar("🎲", "Play", "Games, Mafia, trivia and challenges.", true),
+    _Pillar("🎥", "Cinema", "Tamil movies, discussions and pop culture.", true),
+    _Pillar("🍜", "Food", "Food crawls, dinners and café plans.", false),
+    _Pillar("🎤", "Music", "Karaoke, jamming and open mic.", false),
+    _Pillar("🩩", "Social", "Mixers, house parties and late-night hangs.", false),
+    _Pillar("🌄", "Escape", "Trips, hikes and weekend adventures.", false),
   ];
 
   @override

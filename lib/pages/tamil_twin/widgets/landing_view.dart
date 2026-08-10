@@ -17,7 +17,7 @@ class LandingView extends StatelessWidget {
         Text("TAMIL SOCIAL CLUB", style: AppTextStyles.eyebrow(color: AppColors.gold)),
         const SizedBox(height: 20),
         Text(
-          "WHO'S YOUR\nTAMIL TWIN? 👀",
+          "Who's your\nTamil Twin? 👀",
           textAlign: TextAlign.center,
           style: AppTextStyles.display(color: AppColors.cream, size: 40),
         ),

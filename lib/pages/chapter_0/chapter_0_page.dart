@@ -44,7 +44,7 @@ class _Chapter0PageState extends State<Chapter0Page> {
               padding: const EdgeInsets.fromLTRB(20, 90, 20, 50),
               child: Column(
                 children: [
-                  Text("CHAPTER 0", style: AppTextStyles.display(color: AppColors.cream, size: 40)),
+                  Text("Chapter 0", style: AppTextStyles.display(color: AppColors.cream, size: 40)),
                   const SizedBox(height: 12),
                   Text(
                     "One Friday night. 15–20 strangers. Let's see what happens.",

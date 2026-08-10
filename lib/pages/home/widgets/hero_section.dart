@@ -22,7 +22,7 @@ class HeroSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "YOUR PEOPLE ARE\nSOMEWHERE IN BENGALURU.",
+                "Your people are\nsomewhere in Bengaluru.",
                 style: AppTextStyles.display(color: AppColors.cream, size: isMobile ? 38 : 62),
               ),
               const SizedBox(height: 20),

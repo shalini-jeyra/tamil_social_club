@@ -24,7 +24,7 @@ class Chapter0TeaserSection extends StatelessWidget {
           Text("WHAT'S HAPPENING", style: AppTextStyles.eyebrow(color: AppColors.gold)),
           const SizedBox(height: 20),
           Text(
-            "🎲 CHAPTER 0",
+            "🎲 Chapter 0",
             style: AppTextStyles.display(color: AppColors.cream, size: 28),
           ),
           const SizedBox(height: 6),

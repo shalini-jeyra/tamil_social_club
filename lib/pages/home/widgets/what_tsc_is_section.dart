@@ -61,7 +61,7 @@ class WhatTscIsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "NOT ANOTHER\nNETWORKING EVENT.",
+          "Not another\nnetworking event.",
           style: AppTextStyles.display(
             color: AppColors.cream,
             size: isMobile ? 30 : 42,
