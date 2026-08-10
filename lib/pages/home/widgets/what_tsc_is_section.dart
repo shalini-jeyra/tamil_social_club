@@ -61,7 +61,7 @@ class WhatTscIsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Ithu LinkedIn\naiyiram illa.",
+          "Ithu LinkedIn\nilla.",
           style: AppTextStyles.display(
             color: AppColors.cream,
             size: isMobile ? 30 : 42,
