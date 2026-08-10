@@ -61,10 +61,18 @@ class WhatTscIsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Not another\nnetworking event.",
+          "Ithu LinkedIn\naiyiram illa.",
           style: AppTextStyles.display(
             color: AppColors.cream,
             size: isMobile ? 30 : 42,
+          ).copyWith(height: 1.1),
+        ),
+        const SizedBox(height: 20),
+        Text(
+          "No startup pitches. No awkward 'so what do you do' small talk. Just a space to chill, meet namma aalu's, and actually have fun.",
+          style: AppTextStyles.body(
+            color: AppColors.cream.withOpacity(0.85),
+            size: isMobile ? 18 : 20,
           ),
         ),
       ],
@@ -75,9 +83,9 @@ class WhatTscIsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _line("No awkward introductions."),
+        _line("No 'what's your CTC' uncle energy."),
         const SizedBox(height: 16),
-        _line("No exchanging LinkedIn profiles for the sake of it."),
+        _line("No forced networking vibes."),
         const SizedBox(height: 32),
         Container(
           padding: const EdgeInsets.all(24),

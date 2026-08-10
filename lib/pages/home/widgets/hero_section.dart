@@ -62,7 +62,7 @@ class HeroSection extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     Text(
-                      "Your people are\nsomewhere in Bengaluru.",
+                      "Your makkal are\nsomewhere in Bengaluru.",
                       style: AppTextStyles.display(
                         color: AppColors.cream,
                         size: isMobile ? 36 : 62,
@@ -72,8 +72,8 @@ class HeroSection extends StatelessWidget {
                     ConstrainedBox(
                       constraints: const BoxConstraints(maxWidth: 460),
                       child: Text(
-                        "Tamil Social Club is an independent community bringing Tamil people "
-                        "across Bengaluru together for games, conversations, food and genuinely "
+                        "Tamil Social Club is an independent community bringing namma pasanga and ponnunga "
+                        "across Bengaluru together for games, nalla saapadu, yapping, and genuinely "
                         "good weekends.",
                         style: AppTextStyles.body(
                           color: AppColors.cream.withOpacity(0.75),
@@ -95,7 +95,7 @@ class HeroSection extends StatelessWidget {
                           },
                         ),
                         AppButton(
-                          label: "See what's happening →",
+                          label: "Enna nadakkuthu? →",
                           variant: AppButtonVariant.ghostLight,
                           onPressed: () => context.goNamed("experiences"),
                         ),

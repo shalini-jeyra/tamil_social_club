@@ -26,7 +26,7 @@ class CommunitySection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Come for the event.\nStay for the people.",
+                "Come for the vibes.\nStay for the makkal.",
                 textAlign: TextAlign.center,
                 style: AppTextStyles.display(
                   size: isMobile ? 32 : 46,
@@ -35,7 +35,7 @@ class CommunitySection extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               Text(
-                "We're building a community for Tamil people in Bengaluru who want more than another networking event.",
+                "We're building a community for Tamil people in Bengaluru who just want a solid gang to hang out with.",
                 textAlign: TextAlign.center,
                 style: AppTextStyles.body(
                   size: isMobile ? 18 : 20,

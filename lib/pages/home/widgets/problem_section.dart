@@ -42,9 +42,9 @@ class ProblemSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "\u201CWe should meet sometime.\u201D",
+                      "\u201CMacha, we should definitely meet next week.\u201D",
                       style: AppTextStyles.display(
-                        size: isMobile ? 28 : 46,
+                        size: isMobile ? 24 : 42,
                         color: AppColors.charcoal,
                       ).copyWith(height: 1.1, letterSpacing: -0.3),
                     ),
@@ -52,7 +52,7 @@ class ProblemSection extends StatelessWidget {
                     Container(width: 48, height: 2, color: AppColors.gold),
                     const SizedBox(height: 36),
                     Text(
-                      "We've all said it.",
+                      "And that next week never comes.",
                       style: AppTextStyles.body(
                         size: isMobile ? 18 : 22,
                         color: AppColors.charcoal.withOpacity(0.85),
@@ -60,7 +60,7 @@ class ProblemSection extends StatelessWidget {
                     ),
                     const SizedBox(height: 14),
                     Text(
-                      "Somehow, \u201Csometime\u201D never becomes a plan.",
+                      "The WhatsApp group dies, and we end up staying home.",
                       style: AppTextStyles.body(
                         size: isMobile ? 18 : 22,
                         color: AppColors.charcoal.withOpacity(0.55),
@@ -79,7 +79,7 @@ class ProblemSection extends StatelessWidget {
                         ),
                         const SizedBox(width: 16),
                         Text(
-                          "So we're making the plan.",
+                          "So we're fixing the plan for you.",
                           style: AppTextStyles.display(
                             size: isMobile ? 20 : 28,
                             color: AppColors.teal800,
