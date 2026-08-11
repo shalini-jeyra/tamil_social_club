@@ -29,7 +29,7 @@ class InstagramStrip extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "More TSC → @tamilsocialclub",
+                  "More Tamil Social Club → @tamilsocialclub",
                   style: AppTextStyles.body(size: 14, weight: FontWeight.w600, color: AppColors.charcoal.withOpacity(0.8)),
                 ),
                 Text(

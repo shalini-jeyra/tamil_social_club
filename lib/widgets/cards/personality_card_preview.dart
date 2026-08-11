@@ -49,7 +49,7 @@ class _PersonalityCardPreviewState extends State<PersonalityCardPreview> {
                 style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.7), size: 13, weight: FontWeight.w600),
               ),
               const SizedBox(height: 22),
-              Text("TSC / 001", style: AppTextStyles.body(color: AppColors.gold.withOpacity(0.7), size: 11, weight: FontWeight.w600)),
+              Text("TAMIL SOCIAL CLUB / 001", style: AppTextStyles.body(color: AppColors.gold.withOpacity(0.7), size: 11, weight: FontWeight.w600)),
             ],
           ),
         ),
