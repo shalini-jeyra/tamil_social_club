@@ -32,7 +32,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
               icon: const Icon(Icons.menu_rounded, color: AppColors.cream),
               onPressed: () => Scaffold.of(context).openDrawer(),
             ),
-          
+
           // Logo
           InkWell(
             onTap: () => context.goNamed("home"),
@@ -62,7 +62,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
               ],
             ),
           ),
-          
+
           if (isWide) ...[
             // Centered Nav Links
             Expanded(
@@ -75,7 +75,8 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
                   const SizedBox(width: 16),
                   _NavLink("Tamil Twin", "/tamil-twin", location, context),
                   const SizedBox(width: 16),
-                  _NavLink("Community", "/community", location, context),
+                  _NavLink(
+                      "Community", "/?scrollTo=community", location, context),
                 ],
               ),
             ),
@@ -112,9 +113,12 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text("Join the community", style: AppTextStyles.button(color: AppColors.cream).copyWith(fontSize: 13)),
+          Text("Join the community",
+              style: AppTextStyles.button(color: AppColors.cream)
+                  .copyWith(fontSize: 13)),
           const SizedBox(width: 8),
-          const Icon(Icons.arrow_forward_rounded, size: 16, color: AppColors.cream),
+          const Icon(Icons.arrow_forward_rounded,
+              size: 16, color: AppColors.cream),
         ],
       ),
     );
@@ -127,7 +131,8 @@ class _NavLink extends StatelessWidget {
   final String currentLocation;
   final BuildContext parentContext;
 
-  const _NavLink(this.label, this.path, this.currentLocation, this.parentContext);
+  const _NavLink(
+      this.label, this.path, this.currentLocation, this.parentContext);
 
   bool get _isActive => currentLocation == path;
 

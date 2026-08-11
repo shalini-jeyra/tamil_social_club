@@ -27,26 +27,71 @@ import "widgets/tamil_twin_teaser_section.dart";
 /// The old "More than just networking" section was removed outright —
 /// naming networking, even to deny it, still put networking in the
 /// visitor's head.
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  final String? scrollTo;
+  
+  const HomePage({super.key, this.scrollTo});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final ScrollController _scrollController = ScrollController();
+  final GlobalKey _communityKey = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollToSection();
+  }
+
+  @override
+  void didUpdateWidget(HomePage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.scrollTo != oldWidget.scrollTo) {
+      _scrollToSection();
+    }
+  }
+
+  void _scrollToSection() {
+    if (widget.scrollTo == 'community') {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (_communityKey.currentContext != null) {
+          Scrollable.ensureVisible(
+            _communityKey.currentContext!,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeInOut,
+          );
+        }
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AppHeader(),
       drawer: const AppDrawer(),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
+        controller: _scrollController,
         child: Column(
           children: [
-            HeroSection(),
-            TamilTwinTeaserSection(),
-            ProblemSection(),
-            Chapter0TeaserSection(),
-            ExperiencePillarsSection(),
-            ComeAloneSection(),
-            CommunitySection(),
-            InstagramStrip(),
-            AppFooter(),
+            const HeroSection(),
+            const TamilTwinTeaserSection(),
+            const ProblemSection(),
+            const Chapter0TeaserSection(),
+            const ExperiencePillarsSection(),
+            const ComeAloneSection(),
+            CommunitySection(key: _communityKey),
+            const InstagramStrip(),
+            const AppFooter(),
           ],
         ),
       ),

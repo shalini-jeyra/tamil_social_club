@@ -14,7 +14,7 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: "/",
       name: "home",
-      pageBuilder: (context, state) => _page(const HomePage(), state),
+      pageBuilder: (context, state) => _page(HomePage(scrollTo: state.uri.queryParameters["scrollTo"]), state),
     ),
     GoRoute(
       path: "/experiences",
