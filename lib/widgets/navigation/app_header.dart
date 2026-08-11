@@ -40,20 +40,22 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  "TSC",
-                  style: AppTextStyles.display(size: 28, color: AppColors.gold),
+                ClipOval(
+                  child: Image.asset(
+                    "assets/images/logo.png",
+                    height: 38,
+                    width: 38,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 if (isWide) ...[
-                  const SizedBox(width: 12),
-                  Container(width: 1, height: 32, color: AppColors.cream.withOpacity(0.3)),
-                  const SizedBox(width: 12),
+                  const SizedBox(width: 10),
                   Text(
-                    "TAMIL\nSOCIAL\nCLUB",
-                    style: AppTextStyles.button(color: AppColors.cream).copyWith(
-                      fontSize: 8,
-                      height: 1.1,
-                      letterSpacing: 1.5,
+                    "Tamil Social Club",
+                    style: AppTextStyles.display(
+                      size: 15,
+                      weight: FontWeight.w600,
+                      color: AppColors.cream,
                     ),
                   ),
                 ],

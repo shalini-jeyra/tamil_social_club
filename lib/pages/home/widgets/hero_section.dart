@@ -107,41 +107,6 @@ class HeroSection extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 48),
-                  Row(
-                    children: [
-                      // Avatar placeholder group
-                      SizedBox(
-                        width: 120,
-                        height: 40,
-                        child: Stack(
-                          children: List.generate(4, (index) {
-                            return Positioned(
-                              left: index * 24.0,
-                              child: Container(
-                                width: 40,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppColors.charcoal,
-                                  border: Border.all(color: Colors.black, width: 2),
-                                  image: DecorationImage(
-                                    image: AssetImage("assets/images/logo.png"), // Using logo as placeholder avatar for now
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            );
-                          }),
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        "A growing community of\nTamil people in Bengaluru.",
-                        style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.6), size: 14),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),
