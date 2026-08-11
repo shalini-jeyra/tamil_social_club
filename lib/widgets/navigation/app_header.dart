@@ -22,7 +22,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
 
     return Container(
       height: 64,
-      color: Colors.transparent,
+      color: AppColors.teal900,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

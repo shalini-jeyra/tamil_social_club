@@ -8,6 +8,8 @@ import "widgets/calculating_view.dart";
 import "widgets/landing_view.dart";
 import "widgets/quiz_view.dart";
 import "widgets/result_view.dart";
+import "../../widgets/navigation/app_drawer.dart";
+import "../../widgets/navigation/app_header.dart";
 
 enum _Stage { landing, quiz, calculating, result }
 
@@ -68,7 +70,6 @@ class _TamilTwinPageState extends State<TamilTwinPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: const AppHeader(),
       drawer: const AppDrawer(),
       backgroundColor: AppColors.teal900,

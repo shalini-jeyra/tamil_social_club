@@ -24,7 +24,7 @@ class HeroSection extends StatelessWidget {
           // Background Image
           Positioned.fill(
             child: Image.asset(
-              "assets/images/hero_bg.png",
+              "assets/images/hero_bg.jpg",
               fit: BoxFit.cover,
             ),
           ),
@@ -77,7 +77,7 @@ class HeroSection extends StatelessWidget {
                   ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 500),
                     child: Text(
-                      "Tamil Social Club is a community for Tamil people in Bengaluru to meet, hang out and find something fun to do together. (நம்ம ஆளுங்க!)",
+                      "Tamil Social Club is a community for Tamil people in Bengaluru to meet, hang out and find something fun to do together.",
                       style: AppTextStyles.body(
                         color: AppColors.cream.withOpacity(0.85),
                         size: isMobile ? 18 : 22,

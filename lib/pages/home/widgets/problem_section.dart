@@ -25,11 +25,11 @@ class ProblemSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "\u201Cமச்சான், நாம சீக்கிரம்\nமீட் பண்ணனும்.\u201D",
+                "\u201CWe should\nmeet sometime.\u201D",
                 style: AppTextStyles.display(
-                  size: isMobile ? 38 : 60,
+                  size: isMobile ? 38 : 64,
                   color: AppColors.charcoal,
-                ).copyWith(height: 1.1, letterSpacing: -0.5),
+                ).copyWith(height: 1.06, letterSpacing: -0.5),
               ),
               const SizedBox(height: 40),
               Container(width: 48, height: 3, color: AppColors.gold),

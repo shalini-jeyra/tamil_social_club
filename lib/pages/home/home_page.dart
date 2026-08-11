@@ -33,7 +33,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: const AppHeader(),
       drawer: const AppDrawer(),
       body: const SingleChildScrollView(
