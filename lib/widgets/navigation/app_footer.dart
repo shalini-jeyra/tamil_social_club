@@ -14,30 +14,30 @@ class AppFooter extends StatelessWidget {
     return Container(
       width: double.infinity,
       color: AppColors.charcoal,
-      padding: const EdgeInsets.fromLTRB(20, 40, 20, 26),
+      padding: const EdgeInsets.fromLTRB(20, 44, 20, 26),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ClipOval(
+                child: Image.asset("assets/images/logo.png", height: 40, width: 40, fit: BoxFit.cover),
+              ),
+              const SizedBox(width: 10),
+              Text("Tamil Social Club", style: AppTextStyles.display(color: AppColors.offWhite, size: 16, weight: FontWeight.w600)),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            "A social club for Tamil people in Bengaluru.",
+            style: AppTextStyles.body(color: AppColors.offWhite.withOpacity(0.6), size: 14),
+          ),
+          const SizedBox(height: 24),
           Wrap(
             spacing: 20,
-            runSpacing: 16,
-            crossAxisAlignment: WrapCrossAlignment.center,
+            runSpacing: 12,
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ClipOval(
-                    child: Image.asset(
-                      "assets/images/logo.png",
-                      height: 40,
-                      width: 40,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Text("Tamil Social Club", style: AppTextStyles.display(color: AppColors.offWhite, size: 15, weight: FontWeight.w600)),
-                ],
-              ),
               TextButton(
                 onPressed: () => context.goNamed("tamilTwin"),
                 child: Text("Tamil Twin", style: AppTextStyles.body(color: AppColors.offWhite, size: 14)),
@@ -62,10 +62,10 @@ class AppFooter extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
           Text(
-            "Independent Tamil community in Bengaluru. Not affiliated with any political or religious organisation.",
-            style: AppTextStyles.body(color: AppColors.offWhite.withOpacity(0.5), size: 12),
+            "Bengaluru \u00b7 2026",
+            style: AppTextStyles.body(color: AppColors.offWhite.withOpacity(0.4), size: 12),
           ),
         ],
       ),

@@ -20,75 +20,100 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
     final isWide = MediaQuery.of(context).size.width >= 768;
     final location = GoRouterState.of(context).matchedLocation;
 
-    return AppBar(
-      backgroundColor: AppColors.creamSoft.withOpacity(0.95),
-      elevation: 0,
-      surfaceTintColor: Colors.transparent,
-      titleSpacing: 16,
-      leading: isWide
-          ? null
-          : Builder(
-              builder: (ctx) => IconButton(
-                icon: const Icon(Icons.menu_rounded, color: AppColors.charcoal),
-                onPressed: () => Scaffold.of(ctx).openDrawer(),
+    return Container(
+      height: 64,
+      color: Colors.transparent,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          if (!isWide)
+            IconButton(
+              icon: const Icon(Icons.menu_rounded, color: AppColors.cream),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            ),
+          
+          // Logo
+          InkWell(
+            onTap: () => context.goNamed("home"),
+            borderRadius: BorderRadius.circular(8),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "TSC",
+                  style: AppTextStyles.display(size: 28, color: AppColors.gold),
+                ),
+                if (isWide) ...[
+                  const SizedBox(width: 12),
+                  Container(width: 1, height: 32, color: AppColors.cream.withOpacity(0.3)),
+                  const SizedBox(width: 12),
+                  Text(
+                    "TAMIL\nSOCIAL\nCLUB",
+                    style: AppTextStyles.button(color: AppColors.cream).copyWith(
+                      fontSize: 8,
+                      height: 1.1,
+                      letterSpacing: 1.5,
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+          
+          if (isWide) ...[
+            // Centered Nav Links
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _NavLink("Home", "/", location, context),
+                  const SizedBox(width: 16),
+                  _NavLink("Experiences", "/experiences", location, context),
+                  const SizedBox(width: 16),
+                  _NavLink("Tamil Twin", "/tamil-twin", location, context),
+                  const SizedBox(width: 16),
+                  _NavLink("Community", "/community", location, context),
+                ],
               ),
             ),
-      title: InkWell(
-        onTap: () => context.goNamed("home"),
-        borderRadius: BorderRadius.circular(8),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ClipOval(
-              child: Image.asset(
-                "assets/images/logo.png",
-                height: 38,
-                width: 38,
-                fit: BoxFit.cover,
-              ),
+            // Right CTA
+            Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: _joinButton(context),
             ),
-            if (isWide) ...[
-              const SizedBox(width: 10),
-              Text(
-                "Tamil Social Club",
-                style: AppTextStyles.display(size: 15, weight: FontWeight.w600),
-              ),
-            ],
+          ] else ...[
+            const Spacer(),
+            // Right CTA Mobile
+            Padding(
+              padding: const EdgeInsets.only(right: 4),
+              child: _joinButton(context),
+            ),
           ],
-        ),
+        ],
       ),
-      actions: isWide
-          ? [
-              _NavLink("Experiences", "/experiences", location, context),
-              _NavLink("Tamil Twin", "/tamil-twin", location, context),
-              Padding(
-                padding: const EdgeInsets.only(right: 16, left: 4),
-                child: _joinButton(context),
-              ),
-            ]
-          : [
-              Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: _joinButton(context),
-              ),
-            ],
     );
   }
 
   Widget _joinButton(BuildContext context) {
-    return FilledButton(
-      style: FilledButton.styleFrom(
-        backgroundColor: AppColors.teal900,
+    return OutlinedButton(
+      style: OutlinedButton.styleFrom(
+        foregroundColor: AppColors.gold,
+        side: const BorderSide(color: AppColors.gold),
         shape: const StadiumBorder(),
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       ),
       onPressed: () {
         AnalyticsService.track("whatsapp_clicked", {"from": "nav"});
         ShareService.openUrl(AppLinks.whatsapp);
       },
-      child: Text(
-        "Join",
-        style: AppTextStyles.button(color: AppColors.cream).copyWith(fontSize: 13),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text("Join the community", style: AppTextStyles.button(color: AppColors.cream).copyWith(fontSize: 13)),
+          const SizedBox(width: 8),
+          const Icon(Icons.arrow_forward_rounded, size: 16, color: AppColors.cream),
+        ],
       ),
     );
   }
@@ -113,7 +138,7 @@ class _NavLink extends StatelessWidget {
         style: AppTextStyles.body(
           size: 14,
           weight: _isActive ? FontWeight.w700 : FontWeight.w500,
-          color: _isActive ? AppColors.teal800 : AppColors.charcoal.withOpacity(0.75),
+          color: _isActive ? AppColors.gold : AppColors.cream.withOpacity(0.75),
         ),
       ),
     );

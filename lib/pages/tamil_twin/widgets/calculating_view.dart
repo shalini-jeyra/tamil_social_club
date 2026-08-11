@@ -13,6 +13,16 @@ class _CalculatingViewState extends State<CalculatingView> with SingleTickerProv
   late final AnimationController _controller =
       AnimationController(vsync: this, duration: const Duration(seconds: 1))..repeat();
 
+  bool _secondLine = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 650), () {
+      if (mounted) setState(() => _secondLine = true);
+    });
+  }
+
   @override
   void dispose() {
     _controller.dispose();
@@ -27,11 +37,11 @@ class _CalculatingViewState extends State<CalculatingView> with SingleTickerProv
       children: [
         RotationTransition(
           turns: _controller,
-          child: const Text("🎲", style: TextStyle(fontSize: 56)),
+          child: const Text("\ud83c\udfb2", style: TextStyle(fontSize: 56)),
         ),
         const SizedBox(height: 20),
         Text(
-          "Calculating your Tamil Twin...",
+          _secondLine ? "Your Tamil Twin is being summoned." : "Consulting absolutely no scientific data...",
           style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.85), size: 17),
         ),
       ],

@@ -2,8 +2,9 @@ import "package:flutter/material.dart";
 import "../../../core/theme/app_colors.dart";
 import "../../../core/theme/app_text_styles.dart";
 
-/// PRD §7 — "The Problem" section.
-/// Editorial magazine feel — giant decorative quotation mark as backdrop.
+/// "We should meet sometime." — kept from the previous draft, since the
+/// copy already worked. Made more dramatic: bigger type, more whitespace,
+/// no card, no border, no icon. Typography carries the section alone.
 class ProblemSection extends StatelessWidget {
   const ProblemSection({super.key});
 
@@ -15,60 +16,37 @@ class ProblemSection extends StatelessWidget {
       color: AppColors.offWhite,
       padding: EdgeInsets.symmetric(
         horizontal: isMobile ? 20 : 40,
-        vertical: isMobile ? 72 : 108,
+        vertical: isMobile ? 90 : 140,
       ),
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 780),
+          constraints: const BoxConstraints(maxWidth: 820),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "\u201CWe should meet sometime.\u201D",
+                "\u201Cமச்சான், நாம சீக்கிரம்\nமீட் பண்ணனும்.\u201D",
                 style: AppTextStyles.display(
-                  size: isMobile ? 24 : 42,
+                  size: isMobile ? 38 : 60,
                   color: AppColors.charcoal,
-                ).copyWith(height: 1.1, letterSpacing: -0.3),
+                ).copyWith(height: 1.1, letterSpacing: -0.5),
               ),
-              const SizedBox(height: 36),
-              Container(width: 48, height: 2, color: AppColors.gold),
-              const SizedBox(height: 36),
+              const SizedBox(height: 40),
+              Container(width: 48, height: 3, color: AppColors.gold),
+              const SizedBox(height: 40),
               Text(
                 "We've all said it.",
-                style: AppTextStyles.body(
-                  size: isMobile ? 18 : 22,
-                  color: AppColors.charcoal.withOpacity(0.85),
-                ),
+                style: AppTextStyles.body(size: isMobile ? 18 : 22, color: AppColors.charcoal.withOpacity(0.85)),
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: 10),
               Text(
                 "Somehow, \u201Csometime\u201D never becomes a plan.",
-                style: AppTextStyles.body(
-                  size: isMobile ? 18 : 22,
-                  color: AppColors.charcoal.withOpacity(0.55),
-                ),
+                style: AppTextStyles.body(size: isMobile ? 18 : 22, color: AppColors.charcoal.withOpacity(0.55)),
               ),
-              const SizedBox(height: 48),
-              Row(
-                children: [
-                  Container(
-                    width: 4,
-                    height: 36,
-                    decoration: BoxDecoration(
-                      color: AppColors.teal800,
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Text(
-                    "So we're making the plan.",
-                    style: AppTextStyles.display(
-                      size: isMobile ? 20 : 28,
-                      color: AppColors.teal800,
-                      weight: FontWeight.w700,
-                    ),
-                  ),
-                ],
+              const SizedBox(height: 56),
+              Text(
+                "So we're making\nthe plan.",
+                style: AppTextStyles.display(size: isMobile ? 30 : 46, color: AppColors.teal800).copyWith(height: 1.1),
               ),
             ],
           ),

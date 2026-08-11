@@ -29,6 +29,7 @@ class ExperiencesPage extends StatelessWidget {
     final event = chapter0Event;
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: const AppHeader(),
       drawer: const AppDrawer(),
       body: SingleChildScrollView(
@@ -38,7 +39,7 @@ class ExperiencesPage extends StatelessWidget {
             Container(
               width: double.infinity,
               color: AppColors.teal900,
-              padding: EdgeInsets.fromLTRB(20, isMobile ? 56 : 72, 20, 48),
+              padding: EdgeInsets.fromLTRB(20, isMobile ? 100 : 120, 20, 48),
               child: Center(
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 780),

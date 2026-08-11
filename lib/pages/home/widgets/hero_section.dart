@@ -4,7 +4,12 @@ import "../../../core/theme/app_colors.dart";
 import "../../../core/theme/app_text_styles.dart";
 import "../../../services/analytics_service.dart";
 import "../../../widgets/buttons/app_button.dart";
+import "hero_painter.dart";
 
+/// PRD redesign — hero stays a headline and one dominant CTA.
+/// No paragraph, no "professionals and creatives", no third button.
+/// A quiet skyline + string-lights motif replaces the old giant
+/// "TSC" watermark (see hero_painter.dart).
 class HeroSection extends StatelessWidget {
   const HeroSection({super.key});
 
@@ -13,96 +18,131 @@ class HeroSection extends StatelessWidget {
     final isMobile = MediaQuery.of(context).size.width < 768;
     return Container(
       width: double.infinity,
-      decoration: const BoxDecoration(
-        gradient: RadialGradient(
-          center: Alignment(-0.6, -0.4),
-          radius: 1.4,
-          colors: [
-            Color(0xFF1A5550), // slightly lighter teal at the glow point
-            AppColors.teal900,
-            Color(0xFF081F1D), // deeper at the edges
-          ],
-          stops: [0.0, 0.5, 1.0],
-        ),
-      ),
+      color: AppColors.teal900,
       child: Stack(
         children: [
-          // Decorative large background text — very subtle watermark
-          Positioned(
-            right: isMobile ? -20 : 0,
-            bottom: 0,
-            child: Text(
-              "TSC",
-              style: TextStyle(
-                fontSize: isMobile ? 180 : 280,
-                fontWeight: FontWeight.w900,
-                color: AppColors.cream.withOpacity(0.025),
-                height: 1,
-                letterSpacing: -8,
+          // Background Image
+          Positioned.fill(
+            child: Image.asset(
+              "assets/images/hero_bg.png",
+              fit: BoxFit.cover,
+            ),
+          ),
+          // Dark Gradient Overlay for text legibility
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                    Colors.black.withOpacity(0.85),
+                    Colors.black.withOpacity(0.4),
+                  ],
+                ),
               ),
             ),
           ),
-          // Main content
           Padding(
-            padding: EdgeInsets.fromLTRB(isMobile ? 20 : 40, isMobile ? 80 : 100, isMobile ? 20 : 40, 72),
-            child: Center(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 980),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Gold accent bar
-                    Container(
-                      width: 40,
-                      height: 3,
-                      decoration: BoxDecoration(
-                        color: AppColors.gold,
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Text(
-                      "Your people are\nsomewhere in Bengaluru.",
+            padding: EdgeInsets.fromLTRB(
+              isMobile ? 20 : 80,
+              isMobile ? 120 : 160,
+              isMobile ? 20 : 40,
+              isMobile ? 100 : 140,
+            ),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 800),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Dear Bengaluru,",
+                    style: AppTextStyles.handwriting(color: AppColors.cream.withOpacity(0.8), size: 32),
+                  ),
+                  const SizedBox(height: 8),
+                  RichText(
+                    text: TextSpan(
                       style: AppTextStyles.display(
                         color: AppColors.cream,
-                        size: isMobile ? 36 : 62,
-                      ).copyWith(height: 1.06, letterSpacing: -0.5),
-                    ),
-                    const SizedBox(height: 22),
-                    ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 460),
-                      child: Text(
-                        "Tamil Social Club is an independent community bringing Tamil professionals and creatives "
-                        "across Bengaluru together for games, conversations, food, and genuinely "
-                        "good weekends.",
-                        style: AppTextStyles.body(
-                          color: AppColors.cream.withOpacity(0.75),
-                          size: 17,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 32),
-                    Wrap(
-                      spacing: 12,
-                      runSpacing: 12,
-                      children: [
-                        AppButton(
-                          label: "Find your Tamil Twin 🎲",
-                          variant: AppButtonVariant.gold,
-                          onPressed: () {
-                            AnalyticsService.track("twin_game_started", {"from": "hero"});
-                            context.goNamed("tamilTwin");
-                          },
-                        ),
-                        AppButton(
-                          label: "See what's happening →",
-                          variant: AppButtonVariant.ghostLight,
-                          onPressed: () => context.goNamed("experiences"),
-                        ),
+                        size: isMobile ? 54 : 96,
+                      ).copyWith(height: 1.0, letterSpacing: -1, textBaseline: TextBaseline.alphabetic),
+                      children: const [
+                        TextSpan(text: "YOUR PEOPLE\nARE SOMEWHERE IN\n"),
+                        TextSpan(text: "BENGALURU.", style: TextStyle(color: AppColors.gold)),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 32),
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 500),
+                    child: Text(
+                      "Tamil Social Club is a community for Tamil people in Bengaluru to meet, hang out and find something fun to do together. (நம்ம ஆளுங்க!)",
+                      style: AppTextStyles.body(
+                        color: AppColors.cream.withOpacity(0.85),
+                        size: isMobile ? 18 : 22,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 48),
+                  Wrap(
+                    spacing: 16,
+                    runSpacing: 16,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      AppButton(
+                        label: "Find your Tamil Twin →",
+                        variant: AppButtonVariant.gold,
+                        large: true,
+                        onPressed: () {
+                          AnalyticsService.track("twin_game_started", {"from": "hero"});
+                          context.goNamed("tamilTwin");
+                        },
+                      ),
+                      AppButton(
+                        label: "See what's happening ↓",
+                        variant: AppButtonVariant.ghostLight,
+                        large: true,
+                        onPressed: () => context.goNamed("experiences"),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 48),
+                  Row(
+                    children: [
+                      // Avatar placeholder group
+                      SizedBox(
+                        width: 120,
+                        height: 40,
+                        child: Stack(
+                          children: List.generate(4, (index) {
+                            return Positioned(
+                              left: index * 24.0,
+                              child: Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppColors.charcoal,
+                                  border: Border.all(color: Colors.black, width: 2),
+                                  image: DecorationImage(
+                                    image: AssetImage("assets/images/logo.png"), // Using logo as placeholder avatar for now
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            );
+                          }),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        "A growing community of\nTamil people in Bengaluru.",
+                        style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.6), size: 14),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),

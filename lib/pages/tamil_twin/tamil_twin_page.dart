@@ -68,6 +68,9 @@ class _TamilTwinPageState extends State<TamilTwinPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: const AppHeader(),
+      drawer: const AppDrawer(),
       backgroundColor: AppColors.teal900,
       body: SafeArea(
         child: Center(

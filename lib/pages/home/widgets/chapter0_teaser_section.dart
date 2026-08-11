@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "../../../core/constants/links.dart";
+import "package:go_router/go_router.dart";
 import "../../../core/theme/app_colors.dart";
 import "../../../core/theme/app_text_styles.dart";
 import "../../../data/events.dart";
@@ -8,79 +8,68 @@ import "../../../services/share_service.dart";
 import "../../../widgets/buttons/app_button.dart";
 import "../../../widgets/sections/section_wrapper.dart";
 
-/// PRD §10 — "WHAT'S HAPPENING" section.
-/// Shows Chapter 0 listing with direct Luma CTA.
+/// Made visually dominant per the redesign brief — this is "here's
+/// something we're actually doing," not a philosophy slide. Plain lines
+/// instead of pill chips; one CTA.
 class Chapter0TeaserSection extends StatelessWidget {
   const Chapter0TeaserSection({super.key});
 
   @override
   Widget build(BuildContext context) {
     final event = chapter0Event;
+    final isMobile = MediaQuery.of(context).size.width < 768;
     return SectionWrapper(
       background: SectionBackground.teal,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("WHAT'S HAPPENING", style: AppTextStyles.eyebrow(color: AppColors.gold)),
-          const SizedBox(height: 20),
+          Text("CHAPTER 0", style: AppTextStyles.eyebrow(color: AppColors.gold)),
+          const SizedBox(height: 18),
           Text(
-            "🎲 Chapter 0",
-            style: AppTextStyles.display(color: AppColors.cream, size: 28),
+            "One living room.\n20 strangers.\nQuestionable\nalliances.",
+            style: AppTextStyles.display(color: AppColors.cream, size: isMobile ? 34 : 54).copyWith(height: 1.06),
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 22),
           Text(
             "Late-Night Mafia",
-            style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.6), size: 16, weight: FontWeight.w600),
+            style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.7), size: 17, weight: FontWeight.w600),
           ),
-          const SizedBox(height: 20),
-          Wrap(
-            spacing: 14,
-            runSpacing: 10,
-            children: [
-              _detail("📅 ${event.dateLabel}"),
-              _detail("🕗 ${event.timeLabel}"),
-              _detail("📍 ${event.location}"),
-            ],
-          ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
           Text(
-            "15–20 people. One living room. Questionable alliances.",
-            style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.85), size: 17),
+            "FRI 14 AUG · 8 PM · HSR",
+            style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.85), size: 15, weight: FontWeight.w600),
           ),
+          const SizedBox(height: 4),
+          Text(
+            "${event.price} · ${event.capacityLabel.toUpperCase()}",
+            style: AppTextStyles.display(color: AppColors.gold, size: 24),
+          ),
+          const SizedBox(height: 28),
+          AppButton(
+            label: "Get a spot →",
+            variant: AppButtonVariant.gold,
+            large: true,
+            onPressed: () {
+              AnalyticsService.track("luma_clicked", {"from": "home_teaser"});
+              ShareService.openUrl(event.lumaUrl);
+            },
+          ),
+          const SizedBox(height: 36),
+          for (final a in event.activities)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Text(a, style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.75), size: 15)),
+            ),
           const SizedBox(height: 8),
-          Text(
-            event.price,
-            style: AppTextStyles.display(color: AppColors.gold, size: 26),
-          ),
-          const SizedBox(height: 24),
-          Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            children: [
-              AppButton(
-                label: "Apply for a spot →",
-                variant: AppButtonVariant.gold,
-                large: true,
-                onPressed: () {
-                  AnalyticsService.track("luma_clicked", {"from": "home_teaser"});
-                  ShareService.openUrl(event.lumaUrl);
-                },
-              ),
-            ],
+          GestureDetector(
+            onTap: () => context.goNamed("chapter0"),
+            child: Text(
+              "Entry by approval. Full details →",
+              style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.55), size: 13, weight: FontWeight.w600),
+            ),
           ),
         ],
       ),
-    );
-  }
-
-  Widget _detail(String text) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-      decoration: BoxDecoration(
-        color: AppColors.cream.withOpacity(0.08),
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Text(text, style: AppTextStyles.body(color: AppColors.cream, size: 14, weight: FontWeight.w600)),
     );
   }
 }

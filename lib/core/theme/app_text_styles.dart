@@ -11,7 +11,7 @@ class AppTextStyles {
     double size = 40,
     FontWeight weight = FontWeight.w700,
   }) {
-    return GoogleFonts.spaceGrotesk(
+    return GoogleFonts.oswald(
       fontSize: size,
       fontWeight: weight,
       color: color,
@@ -20,7 +20,7 @@ class AppTextStyles {
   }
 
   static TextStyle eyebrow({Color color = AppColors.teal800}) {
-    return GoogleFonts.spaceGrotesk(
+    return GoogleFonts.inter(
       fontSize: 12,
       fontWeight: FontWeight.w600,
       letterSpacing: 2.0,
@@ -38,5 +38,12 @@ class AppTextStyles {
 
   static TextStyle button({Color color = AppColors.charcoal}) {
     return GoogleFonts.inter(fontSize: 15, fontWeight: FontWeight.w700, color: color);
+  }
+
+  static TextStyle handwriting({
+    Color color = AppColors.gold,
+    double size = 28,
+  }) {
+    return GoogleFonts.caveat(fontSize: size, color: color);
   }
 }

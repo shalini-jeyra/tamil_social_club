@@ -4,10 +4,11 @@ import "../../../core/theme/app_colors.dart";
 import "../../../core/theme/app_text_styles.dart";
 import "../../../services/analytics_service.dart";
 import "../../../widgets/buttons/app_button.dart";
-import "../../../widgets/cards/id_card_preview.dart";
-import "../../../widgets/cards/stat_chip.dart";
+import "../../../widgets/cards/personality_card_preview.dart";
 import "../../../widgets/sections/section_wrapper.dart";
 
+/// Moved to sit right after the hero — this is the site's interactive
+/// hook and shouldn't be buried near the bottom.
 class TamilTwinTeaserSection extends StatelessWidget {
   const TamilTwinTeaserSection({super.key});
 
@@ -18,27 +19,19 @@ class TamilTwinTeaserSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text("THE GAME", style: AppTextStyles.eyebrow()),
-        const SizedBox(height: 8),
-        Text("Okay, but what's YOUR Tamil Twin?", style: AppTextStyles.display(size: isMobile ? 28 : 38)),
-        const SizedBox(height: 14),
-        ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 420),
-          child: Text(
-            "A completely unscientific test to discover what kind of Tamil person you are in Bengaluru.",
-            style: AppTextStyles.body(size: 18, color: AppColors.charcoal.withOpacity(0.78)),
-          ),
+        Text("BEFORE YOU MEET THE CLUB...", style: AppTextStyles.eyebrow()),
+        const SizedBox(height: 10),
+        Text("Who's your\nTamil Twin?", style: AppTextStyles.display(size: isMobile ? 34 : 46)),
+        const SizedBox(height: 16),
+        Text(
+          "8 questions.\nZero scientific accuracy.\nPotentially concerning results.",
+          style: AppTextStyles.body(size: 17, color: AppColors.charcoal.withOpacity(0.75)),
         ),
-        const SizedBox(height: 20),
-        const Wrap(spacing: 10, runSpacing: 10, children: [
-          StatChip(value: "8", label: "questions"),
-          StatChip(value: "2", label: "minutes"),
-          StatChip(value: "0%", label: "scientific accuracy"),
-        ]),
-        const SizedBox(height: 22),
+        const SizedBox(height: 26),
         AppButton(
-          label: "Find my Twin →",
+          label: "Find out →",
           variant: AppButtonVariant.teal,
+          large: true,
           onPressed: () {
             AnalyticsService.track("twin_game_started", {"from": "home_teaser"});
             context.goNamed("tamilTwin");
@@ -52,15 +45,15 @@ class TamilTwinTeaserSection extends StatelessWidget {
       child: isMobile
           ? Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               copy,
-              const SizedBox(height: 32),
-              const Center(child: IdCardPreview()),
+              const SizedBox(height: 40),
+              const Center(child: PersonalityCardPreview()),
             ])
           : Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(flex: 6, child: copy),
-                const SizedBox(width: 36),
-                const Expanded(flex: 4, child: Center(child: IdCardPreview())),
+                const SizedBox(width: 40),
+                const Expanded(flex: 4, child: Center(child: PersonalityCardPreview())),
               ],
             ),
     );

@@ -6,6 +6,9 @@ import "../../../services/analytics_service.dart";
 import "../../../widgets/buttons/app_button.dart";
 import "share_sheet.dart";
 
+/// Rewritten to read like a shareable personality reveal, not a UI card:
+/// "You got..." instead of a label, one line of traits instead of pills,
+/// "Your mission:" instead of a boxed callout.
 class ResultView extends StatefulWidget {
   final TwinResult result;
   final VoidCallback onMeetPeople;
@@ -38,65 +41,32 @@ class _ResultViewState extends State<ResultView> {
       key: const ValueKey("result"),
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text("YOUR TAMIL TWIN IS", style: AppTextStyles.eyebrow(color: AppColors.cream.withOpacity(0.6))),
+        Text("YOU GOT...", style: AppTextStyles.eyebrow(color: AppColors.cream.withOpacity(0.6))),
+        const SizedBox(height: 14),
+        Text(r.emoji, style: const TextStyle(fontSize: 56)),
+        const SizedBox(height: 8),
+        Text(r.name.toUpperCase(), style: AppTextStyles.display(color: AppColors.gold, size: 34), textAlign: TextAlign.center),
         const SizedBox(height: 16),
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 36),
-          decoration: BoxDecoration(
-            color: AppColors.cream.withOpacity(0.06),
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: AppColors.gold),
-          ),
-          child: Column(
-            children: [
-              Text(r.emoji, style: const TextStyle(fontSize: 52)),
-              const SizedBox(height: 10),
-              Text(r.name.toUpperCase(), style: AppTextStyles.display(color: AppColors.gold, size: 30)),
-              const SizedBox(height: 14),
-              Text(
-                r.zinger,
-                textAlign: TextAlign.center,
-                style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.85), size: 16),
-              ),
-              const SizedBox(height: 16),
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                alignment: WrapAlignment.center,
-                children: r.tags
-                    .map((t) => Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.cream.withOpacity(0.3)),
-                            borderRadius: BorderRadius.circular(999),
-                          ),
-                          child: Text(t, style: AppTextStyles.body(color: AppColors.cream, size: 12)),
-                        ))
-                    .toList(),
-              ),
-            ],
-          ),
+        Text(
+          r.zinger,
+          textAlign: TextAlign.center,
+          style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.85), size: 17),
         ),
-        const SizedBox(height: 20),
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-          decoration: BoxDecoration(
-            color: AppColors.gold.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: AppColors.gold, style: BorderStyle.solid),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("YOUR CHAPTER 0 MISSION", style: AppTextStyles.eyebrow(color: AppColors.gold)),
-              const SizedBox(height: 6),
-              Text(r.mission, style: AppTextStyles.body(color: AppColors.cream, size: 16)),
-            ],
-          ),
+        const SizedBox(height: 18),
+        Text(
+          r.tags.map((t) => t.toUpperCase()).join(" \u00b7 "),
+          textAlign: TextAlign.center,
+          style: AppTextStyles.body(color: AppColors.gold, size: 13, weight: FontWeight.w700),
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 32),
+        Text("YOUR MISSION:", style: AppTextStyles.eyebrow(color: AppColors.gold)),
+        const SizedBox(height: 8),
+        Text(
+          r.mission,
+          textAlign: TextAlign.center,
+          style: AppTextStyles.body(color: AppColors.cream, size: 17),
+        ),
+        const SizedBox(height: 32),
         Wrap(
           spacing: 12,
           runSpacing: 12,
@@ -105,12 +75,13 @@ class _ResultViewState extends State<ResultView> {
             AppButton(
               label: "Share my result",
               variant: AppButtonVariant.gold,
+              large: true,
               onPressed: () {
                 AnalyticsService.track("result_shared", {"channel": "open_panel"});
                 setState(() => _shareOpen = !_shareOpen);
               },
             ),
-            AppButton(label: "Meet my people →", variant: AppButtonVariant.teal, onPressed: widget.onMeetPeople),
+            AppButton(label: "Find my people \u2192", variant: AppButtonVariant.teal, large: true, onPressed: widget.onMeetPeople),
           ],
         ),
         if (_shareOpen) ...[
@@ -121,7 +92,7 @@ class _ResultViewState extends State<ResultView> {
         TextButton(
           onPressed: widget.onRetake,
           child: Text(
-            "Retake the quiz",
+            "Take it again",
             style: AppTextStyles.body(color: AppColors.gold, size: 14, weight: FontWeight.w600),
           ),
         ),

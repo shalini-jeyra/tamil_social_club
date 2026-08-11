@@ -1,122 +1,131 @@
 import "package:flutter/material.dart";
+import "package:lucide_icons/lucide_icons.dart";
 import "../../../core/theme/app_colors.dart";
 import "../../../core/theme/app_text_styles.dart";
 
-/// PRD §9 — "PICK YOUR KIND OF WEEKEND" — 6 experience pillars.
-/// Inactive ones are marked COMING SOON.
 class ExperiencePillarsSection extends StatelessWidget {
   const ExperiencePillarsSection({super.key});
 
-  // Funnier, less formal copy for the community vibe.
   static const _pillars = [
-    _Pillar("🎲", "Play", "Board games, Mafia, trivia and challenges.", true),
-    _Pillar("🎥", "Cinema", "Tamil movies, discussions and pop culture.", true),
-    _Pillar("🍜", "Food", "Food crawls, dinners and café plans.", false),
-    _Pillar("🎤", "Music", "Karaoke, jamming and open mic.", false),
-    _Pillar("🪩", "Social", "Mixers, house parties and late-night hangs.", false),
-    _Pillar("🏕️", "Escape", "Trips, hikes and weekend adventures.", false),
+    _Pillar(LucideIcons.dices, "PLAY", "Games, Mafia, board games and chaos."),
+    _Pillar(LucideIcons.mic, "MUSIC", "Karaoke, jamming and open mic nights."),
+    _Pillar(LucideIcons.clapperboard, "CINEMA", "Tamil movies, screenings and pop-culture."),
+    _Pillar(LucideIcons.sandwich, "FOOD", "Food crawls, dinners and café plans."),
+    _Pillar(LucideIcons.partyPopper, "SOCIAL", "Mixers, house parties and late nights."),
+    _Pillar(LucideIcons.mountain, "ESCAPE", "Trips, hikes and weekend getaways."),
   ];
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.of(context).size.width < 768;
+    final isMobile = MediaQuery.of(context).size.width < 900;
+    
     return Container(
       width: double.infinity,
-      color: AppColors.creamSoft,
+      color: AppColors.offWhite,
       padding: EdgeInsets.symmetric(
         horizontal: isMobile ? 20 : 40,
         vertical: isMobile ? 64 : 96,
       ),
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 980),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("WHAT WE DO", style: AppTextStyles.eyebrow()),
-              const SizedBox(height: 12),
-              Text(
-                "Pick your kind of weekend.",
-                style: AppTextStyles.display(size: isMobile ? 28 : 42),
-              ),
-              const SizedBox(height: 48),
-              isMobile ? _mobileGrid() : _desktopGrid(),
-            ],
-          ),
+          constraints: const BoxConstraints(maxWidth: 1200),
+          child: isMobile ? _mobileLayout() : _desktopLayout(),
         ),
       ),
     );
   }
 
-  Widget _desktopGrid() {
-    return Column(
+  Widget _desktopLayout() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        IntrinsicHeight(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(child: _PillarCard(pillar: _pillars[0])),
-              const SizedBox(width: 20),
-              Expanded(child: _PillarCard(pillar: _pillars[1])),
-              const SizedBox(width: 20),
-              Expanded(child: _PillarCard(pillar: _pillars[2])),
-            ],
+        // Left Text Block
+        Expanded(
+          flex: 4,
+          child: Padding(
+            padding: const EdgeInsets.only(right: 48, top: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "What's your kind of weekend?",
+                  style: AppTextStyles.handwriting(color: AppColors.gold, size: 24),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  "WE GET UP TO\nA LOT OF THINGS.",
+                  style: AppTextStyles.display(size: 42).copyWith(letterSpacing: -0.5, height: 1.05),
+                ),
+                const SizedBox(height: 24),
+                Text(
+                  "Pick your vibe. We've got people for that.",
+                  style: AppTextStyles.body(color: AppColors.charcoal.withOpacity(0.7), size: 18),
+                ),
+              ],
+            ),
           ),
         ),
-        const SizedBox(height: 20),
-        IntrinsicHeight(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(child: _PillarCard(pillar: _pillars[3])),
-              const SizedBox(width: 20),
-              Expanded(child: _PillarCard(pillar: _pillars[4])),
-              const SizedBox(width: 20),
-              Expanded(child: _PillarCard(pillar: _pillars[5])),
-            ],
+        // Right Scrolling Grid
+        Expanded(
+          flex: 8,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: _pillars.map((p) => Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: _PillarCard(pillar: p),
+              )).toList(),
+            ),
           ),
         ),
       ],
     );
   }
 
-  Widget _mobileGrid() {
+  Widget _mobileLayout() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        for (int i = 0; i < _pillars.length; i += 2)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16),
-            child: IntrinsicHeight(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(child: _PillarCard(pillar: _pillars[i])),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: i + 1 < _pillars.length
-                        ? _PillarCard(pillar: _pillars[i + 1])
-                        : const SizedBox(),
-                  ),
-                ],
-              ),
-            ),
+        Text(
+          "What's your kind of weekend?",
+          style: AppTextStyles.handwriting(color: AppColors.gold, size: 24),
+        ),
+        const SizedBox(height: 12),
+        Text(
+          "WE GET UP TO\nA LOT OF THINGS.",
+          style: AppTextStyles.display(size: 36).copyWith(letterSpacing: -0.5, height: 1.05),
+        ),
+        const SizedBox(height: 20),
+        Text(
+          "Pick your vibe. We've got people for that.",
+          style: AppTextStyles.body(color: AppColors.charcoal.withOpacity(0.7), size: 16),
+        ),
+        const SizedBox(height: 40),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          clipBehavior: Clip.none,
+          child: Row(
+            children: _pillars.map((p) => Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: _PillarCard(pillar: p),
+            )).toList(),
           ),
+        ),
       ],
     );
   }
 }
 
 class _Pillar {
-  final String emoji;
-  final String name;
+  final IconData icon;
+  final String title;
   final String description;
-  final bool active;
-  const _Pillar(this.emoji, this.name, this.description, this.active);
+  const _Pillar(this.icon, this.title, this.description);
 }
 
 class _PillarCard extends StatefulWidget {
   final _Pillar pillar;
-  const _PillarCard({super.key, required this.pillar});
+  const _PillarCard({required this.pillar});
 
   @override
   State<_PillarCard> createState() => _PillarCardState();
@@ -127,75 +136,47 @@ class _PillarCardState extends State<_PillarCard> {
 
   @override
   Widget build(BuildContext context) {
-    final pillar = widget.pillar;
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
-      cursor: pillar.active ? SystemMouseCursors.click : SystemMouseCursors.basic,
+      cursor: SystemMouseCursors.click,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        curve: Curves.easeOutCubic,
+        width: 180,
+        height: 240,
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-          color: pillar.active
-              ? (_isHovered ? AppColors.offWhite : AppColors.cream)
-              : AppColors.creamSoft,
-          borderRadius: BorderRadius.circular(4),
+          color: _isHovered ? Colors.white : Colors.transparent,
+          borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: pillar.active
-                ? (_isHovered ? AppColors.gold.withOpacity(0.5) : AppColors.teal900.withOpacity(0.12))
-                : AppColors.charcoal.withOpacity(0.06),
+            color: _isHovered ? AppColors.gold.withOpacity(0.5) : AppColors.charcoal.withOpacity(0.1),
+            width: 1,
           ),
-          boxShadow: _isHovered && pillar.active
-              ? [
-                  BoxShadow(
-                    color: AppColors.charcoal.withOpacity(0.04),
-                    blurRadius: 12,
-                    offset: const Offset(0, 6),
-                  )
-                ]
-              : [],
+          boxShadow: _isHovered ? [
+            BoxShadow(
+              color: AppColors.charcoal.withOpacity(0.05),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            )
+          ] : [],
         ),
-        transform: Matrix4.translationValues(0, _isHovered && pillar.active ? -4 : 0, 0),
+        transform: Matrix4.translationValues(0, _isHovered ? -4 : 0, 0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(
-              children: [
-                Text(pillar.emoji, style: const TextStyle(fontSize: 28)),
-                const Spacer(),
-                if (!pillar.active)
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                    decoration: BoxDecoration(
-                      color: AppColors.charcoal.withOpacity(0.06),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Text(
-                      "COMING SOON",
-                      style: AppTextStyles.eyebrow(color: AppColors.charcoal.withOpacity(0.4)),
-                    ),
-                  ),
-              ],
-            ),
-            const Spacer(),
-            const SizedBox(height: 14),
+            Icon(widget.pillar.icon, size: 36, color: _isHovered ? AppColors.gold : AppColors.teal900),
+            const SizedBox(height: 24),
             Text(
-              pillar.name,
-              style: AppTextStyles.display(
-                size: 17,
-                color: pillar.active ? AppColors.charcoal : AppColors.charcoal.withOpacity(0.4),
-              ),
+              widget.pillar.title,
+              style: AppTextStyles.button(color: AppColors.charcoal).copyWith(letterSpacing: 1),
+              textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 6),
+            const SizedBox(height: 12),
             Text(
-              pillar.description,
-              style: AppTextStyles.body(
-                size: 14,
-                color: pillar.active
-                    ? AppColors.charcoal.withOpacity(0.65)
-                    : AppColors.charcoal.withOpacity(0.35),
-              ),
+              widget.pillar.description,
+              style: AppTextStyles.body(size: 13, color: AppColors.charcoal.withOpacity(0.7)),
+              textAlign: TextAlign.center,
             ),
           ],
         ),

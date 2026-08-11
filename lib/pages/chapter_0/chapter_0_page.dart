@@ -3,7 +3,6 @@ import "package:go_router/go_router.dart";
 import "../../core/theme/app_colors.dart";
 import "../../core/theme/app_text_styles.dart";
 import "../../data/events.dart";
-import "../../models/event.dart";
 import "../../services/analytics_service.dart";
 import "../../services/share_service.dart";
 import "../../widgets/buttons/app_button.dart";
@@ -11,8 +10,9 @@ import "../../widgets/navigation/app_drawer.dart";
 import "../../widgets/navigation/app_footer.dart";
 import "../../widgets/navigation/app_header.dart";
 
-/// Route: "/chapter-0" — event details + Luma hand-off.
-/// Registration happens on Luma; this app stays payment-free (PRD section 14).
+/// Route: "/chapter-0" — rewritten to feel cinematic rather than
+/// document-like: no pill rows, one CTA, the private-address explanation
+/// lives here (not on the homepage teaser).
 class Chapter0Page extends StatefulWidget {
   const Chapter0Page({super.key});
 
@@ -41,55 +41,66 @@ class _Chapter0PageState extends State<Chapter0Page> {
             Container(
               width: double.infinity,
               color: AppColors.teal900,
-              padding: const EdgeInsets.fromLTRB(20, 90, 20, 50),
-              child: Column(
-                children: [
-                  Text("Chapter 0", style: AppTextStyles.display(color: AppColors.cream, size: 40)),
-                  const SizedBox(height: 12),
-                  Text(
-                    "One Friday night. 15–20 strangers. Let's see what happens.",
-                    textAlign: TextAlign.center,
-                    style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.85), size: 17),
+              padding: EdgeInsets.fromLTRB(20, isMobile ? 88 : 110, 20, isMobile ? 60 : 84),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 780),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("CHAPTER 0", style: AppTextStyles.eyebrow(color: AppColors.gold)),
+                      const SizedBox(height: 16),
+                      Text(
+                        "One living room.\n20 strangers.\nQuestionable\nalliances.",
+                        style: AppTextStyles.display(color: AppColors.cream, size: isMobile ? 36 : 58).copyWith(height: 1.05),
+                      ),
+                      const SizedBox(height: 26),
+                      Text(
+                        "${event.dateLabel.split(",").last.trim()} \u00b7 ${event.timeLabel}",
+                        style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.85), size: 16, weight: FontWeight.w600),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        event.location.toUpperCase(),
+                        style: AppTextStyles.body(color: AppColors.cream.withOpacity(0.6), size: 14, weight: FontWeight.w600),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
             Center(
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 780),
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 44, 20, 70),
+                  padding: EdgeInsets.fromLTRB(20, isMobile ? 56 : 84, 20, isMobile ? 56 : 84),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(color: AppColors.cream, borderRadius: BorderRadius.circular(16)),
-                        child: Wrap(
-                          spacing: 10,
-                          runSpacing: 10,
-                          children: [
-                            _pill("📅 ${event.dateLabel}"),
-                            _pill("🕗 ${event.timeLabel}"),
-                            _pill("📍 ${event.location}"),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                      isMobile
-                          ? Column(crossAxisAlignment: CrossAxisAlignment.start, children: [_whatHappens(event), const SizedBox(height: 28), _details(event)])
-                          : Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(child: _whatHappens(event)),
-                                const SizedBox(width: 32),
-                                Expanded(child: _details(event)),
-                              ],
-                            ),
+                      Text("THE PLAN", style: AppTextStyles.eyebrow()),
+                      const SizedBox(height: 26),
+                      const _PlanLine(emoji: "\ud83c\udfb2", title: "Late-Night Mafia", body: "Tamil / Tanglish. Bluffs. Accusations. Chaos."),
+                      const _PlanLine(emoji: "\ud83c\udfac", title: "Cinema & pop culture", body: "Tamil movie arguments nobody asked for."),
+                      const _PlanLine(emoji: "\ud83c\udf7f", title: "Snacks & drinks", body: "Enough to keep the alliances alive."),
+                      const _PlanLine(emoji: "\ud83e\udd1d", title: "Actually meeting people", body: "Because that's the whole point.", last: true),
+                      const SizedBox(height: 48),
+                      Container(width: 48, height: 3, color: AppColors.gold),
                       const SizedBox(height: 32),
+                      Text.rich(
+                        TextSpan(children: [
+                          TextSpan(text: "${event.price} \u00b7 ${event.capacityLabel}\n", style: AppTextStyles.display(size: isMobile ? 24 : 30)),
+                          TextSpan(text: "Entry by approval.\n\n", style: AppTextStyles.body(size: 16, weight: FontWeight.w600, color: AppColors.charcoal.withOpacity(0.8))),
+                          TextSpan(
+                            text: "Since this is hosted at a private residential space, the exact address is shared only with approved attendees after payment.",
+                            style: AppTextStyles.body(size: 15, color: AppColors.charcoal.withOpacity(0.65)),
+                          ),
+                        ]),
+                      ),
+                      const SizedBox(height: 40),
+                      Text("WANT IN?", style: AppTextStyles.eyebrow()),
+                      const SizedBox(height: 16),
                       AppButton(
-                        label: "Apply for a spot →",
+                        label: "Apply for a spot \u2192",
                         variant: AppButtonVariant.gold,
                         large: true,
                         onPressed: () {
@@ -98,22 +109,10 @@ class _Chapter0PageState extends State<Chapter0Page> {
                         },
                       ),
                       const SizedBox(height: 24),
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: ["Apply on Luma", "Approval", "₹199 payment", "Private address", "WhatsApp group"]
-                            .map((s) => Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                                  decoration: BoxDecoration(color: AppColors.cream, borderRadius: BorderRadius.circular(999)),
-                                  child: Text(s, style: AppTextStyles.body(size: 12, color: AppColors.charcoal.withOpacity(0.7))),
-                                ))
-                            .toList(),
-                      ),
-                      const SizedBox(height: 20),
                       TextButton(
                         onPressed: () => context.goNamed("tamilTwin"),
                         child: Text(
-                          "Not sure you're in? Find your Tamil Twin first →",
+                          "Not sure you're in? Find your Tamil Twin first \u2192",
                           style: AppTextStyles.body(color: AppColors.teal800, size: 14, weight: FontWeight.w600),
                         ),
                       ),
@@ -128,51 +127,36 @@ class _Chapter0PageState extends State<Chapter0Page> {
       ),
     );
   }
+}
 
-  Widget _pill(String text) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(color: AppColors.creamSoft, borderRadius: BorderRadius.circular(10)),
-      child: Text(text, style: AppTextStyles.body(size: 13, weight: FontWeight.w600)),
-    );
-  }
+class _PlanLine extends StatelessWidget {
+  final String emoji;
+  final String title;
+  final String body;
+  final bool last;
+  const _PlanLine({required this.emoji, required this.title, required this.body, this.last = false});
 
-  Widget _whatHappens(ClubEvent event) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text("WHAT HAPPENS", style: AppTextStyles.eyebrow()),
-        const SizedBox(height: 10),
-        for (final a in event.activities)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: Text(a, style: AppTextStyles.body(size: 16)),
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: last ? 0 : 22),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(emoji, style: const TextStyle(fontSize: 22)),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title, style: AppTextStyles.display(size: 18)),
+                const SizedBox(height: 4),
+                Text(body, style: AppTextStyles.body(size: 15, color: AppColors.charcoal.withOpacity(0.65))),
+              ],
+            ),
           ),
-      ],
-    );
-  }
-
-  Widget _details(ClubEvent event) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text("THE DETAILS", style: AppTextStyles.eyebrow()),
-        const SizedBox(height: 10),
-        Text.rich(TextSpan(children: [
-          TextSpan(text: "Price: ", style: AppTextStyles.body(size: 16, weight: FontWeight.w700)),
-          TextSpan(text: event.price, style: AppTextStyles.body(size: 16)),
-        ])),
-        const SizedBox(height: 6),
-        Text.rich(TextSpan(children: [
-          TextSpan(text: "Capacity: ", style: AppTextStyles.body(size: 16, weight: FontWeight.w700)),
-          TextSpan(text: event.capacityLabel, style: AppTextStyles.body(size: 16)),
-        ])),
-        const SizedBox(height: 10),
-        Text(
-          "Approved guests get the private address and a spot in the attendee WhatsApp group.",
-          style: AppTextStyles.body(size: 15, color: AppColors.charcoal.withOpacity(0.75)),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

@@ -6,6 +6,8 @@ import "../../../services/analytics_service.dart";
 import "../../../services/share_service.dart";
 import "../../../widgets/buttons/app_button.dart";
 
+/// "Come alone" already carried the emotional sentiment — this section
+/// stays deliberately short and just closes the loop: are you coming?
 class CommunitySection extends StatelessWidget {
   const CommunitySection({super.key});
 
@@ -14,53 +16,44 @@ class CommunitySection extends StatelessWidget {
     final isMobile = MediaQuery.of(context).size.width < 768;
     return Container(
       width: double.infinity,
-      color: AppColors.charcoal,
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 20 : 40,
-        vertical: isMobile ? 72 : 112,
-      ),
+      color: AppColors.cream,
+      padding: EdgeInsets.symmetric(horizontal: isMobile ? 20 : 40, vertical: isMobile ? 80 : 120),
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 680),
+          constraints: const BoxConstraints(maxWidth: 640),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Come for the event.\nStay for the people.",
+                "So...\nare you coming?",
                 textAlign: TextAlign.center,
-                style: AppTextStyles.display(
-                  size: isMobile ? 32 : 46,
-                  color: AppColors.cream,
-                ).copyWith(height: 1.1, letterSpacing: -0.5),
+                style: AppTextStyles.display(size: isMobile ? 32 : 48).copyWith(height: 1.08, letterSpacing: -0.5),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 18),
               Text(
-                "We're building a community for Tamil professionals and creatives in Bengaluru to connect, collaborate, and unwind.",
+                "New plans, new people, occasional chaos.",
                 textAlign: TextAlign.center,
-                style: AppTextStyles.body(
-                  size: isMobile ? 18 : 20,
-                  color: AppColors.cream.withOpacity(0.7),
-                ),
+                style: AppTextStyles.body(size: isMobile ? 17 : 19, color: AppColors.charcoal.withOpacity(0.75)),
               ),
-              const SizedBox(height: 44),
+              const SizedBox(height: 36),
               Wrap(
-                spacing: 16,
-                runSpacing: 16,
+                spacing: 14,
+                runSpacing: 14,
                 alignment: WrapAlignment.center,
                 children: [
                   AppButton(
-                    label: "Join the WhatsApp community →",
-                    variant: AppButtonVariant.gold,
-                    large: isMobile ? false : true,
+                    label: "Join the WhatsApp",
+                    variant: AppButtonVariant.teal,
+                    large: true,
                     onPressed: () {
                       AnalyticsService.track("whatsapp_clicked", {"from": "community_section"});
                       ShareService.openUrl(AppLinks.whatsapp);
                     },
                   ),
                   AppButton(
-                    label: "Follow @tamilsocialclub →",
-                    variant: AppButtonVariant.ghostLight,
-                    large: isMobile ? false : true,
+                    label: "Follow Instagram",
+                    variant: AppButtonVariant.ghostDark,
+                    large: true,
                     onPressed: () {
                       AnalyticsService.track("instagram_clicked", {"from": "community_section"});
                       ShareService.openUrl(AppLinks.instagram);
